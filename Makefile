@@ -22,39 +22,39 @@ OUTLIB = ./obj/
 
 #----------------------------------------------------#
 
-all: makedir convertIV
+all: makedir convert_spec_avantes
 
 makedir:
 	mkdir -p $(OUTLIB);
 
 .PHONY: printmakehelp_and_reminder
-printmakehelp_and_reminder:  convertIV.cpp Makefile
+printmakehelp_and_reminder: convert_spec_avantes.cpp Makefile
 	$(info  /******************************************************************************/)
-	$(info  * task --> printmakehelp_and_reminder: convertIV.cpp Makefile                 *)
+	$(info  * task --> printmakehelp_and_reminder: convert_spec_avantes.cpp Makefile                 *)
 	$(info  * $$@ ----> $@                                         *)
 	$(info  * $$< --------------------------------> $<                          *)
 	$(info  * $$^ --------------------------------> $^                 *)
 	$(info  /******************************************************************************/)
 
-obj/convertIV.o: convertIV.cpp infoStr.hh
+obj/convert_spec_avantes.o: convert_spec_avantes.cpp
 	$(CXX) -c -o $@ $< $(CXXFLAGS) 
 
-obj/libconvertIV.so: obj/convertIV.o
+obj/libconvert_spec_avantes.so: obj/convert_spec_avantes.o
 	$(CXX) -shared -o $@ $^
 
-convertIV: convertIV.cpp infoStr.hh
+convert_spec_avantes: convert_spec_avantes.cpp
 	$(CXX) -o $@ $^ $(CXXFLAGS)
 
-install: makedir obj/libwfsim.so
+install: makedir obj/libconvert_spec_avantes.so
 	mkdir -p $(INSTALLDIR);
-	cp $(OUTLIB)libwfsim.so $(INSTALLDIR)libwfsim.so
+	cp $(OUTLIB)libconvert_spec_avantes.so $(INSTALLDIR)libconvert_spec_avantes.so
 	cp src/*.hh $(INSTALLDIR).
 
 cleaninstall:
 	rm -rf $(INSTALLDIR)
 
 clean:
-	rm -f convertIV
+	rm -f convert_spec_avantes
 	rm -f *~
 	rm -f .*~
 	rm -f $(OUTLIB)*.o
