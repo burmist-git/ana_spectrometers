@@ -27,10 +27,11 @@ else
 	make clean; make;
 	convertlog="convert_spec_avantes.log"
 	rm -rf $convertlog
-	info_file="../data/17.03.2023/info"
-	./convert_spec_avantes 0  $info_file | tee -a $convertlog
+	info_file="../data/17.03.2023_02/info"
+	out_root="../data/17.03.2023_02/hist.root"
+	./convert_spec_avantes 0 $info_file $out_root | tee -a $convertlog
     elif [ "$1" = "-info" ]; then
-	gen_info "../data/17.03.2023/"
+	gen_info "../data/17.03.2023_02/"
     elif [ "$1" = "-h" ]; then
         printHelp
     else
